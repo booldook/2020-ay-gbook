@@ -9,13 +9,13 @@ block content
 		form(name="wrForm" method="post" action="/gbook/save")
 			input.form-control.mb-2(type="text" name="writer" placeholder="작성자")
 			textarea.form-control.mb-2(name="content" placeholder="한마디를 남겨주세요.")
-			button.btn.btn-primary.mr-2 글 남기기
-			button.btn.btn-danger 다시작성
+			button.btn.btn-primary.mr-2(type="submit") 글 남기기
+			button.btn.btn-danger(type="reset") 다시작성
 	.list-wrap.mt-5
 		table.table.table-bordered
 			tbody
-				- for(var i=0; i<10; i++) {
+				each v in lists
 					tr
-						td.p-2(style="width: 20%") 홍길동
-						td.p-2 아버지를 아버지라~
-				- }
+						td.p-2(style="width: 20%;")= v.writer
+						td.p-2= v.content
+						td.p-2(style="width: 20%;")= v.created

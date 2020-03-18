@@ -1,9 +1,9 @@
+require('dotenv').config();
 const express = require('express');
 const app = express();
 const path = require("path");
 const indexRouter = require('./routes/index');
 const gbookRouter = require('./routes/gbook');
-const dotenv = require('dotenv').config();
 
 app.listen(process.env.PORT, () => {
 	console.log(`http://127.0.0.1:${process.env.PORT}`);
@@ -13,6 +13,10 @@ app.listen(process.env.PORT, () => {
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "./views"));
 app.locals.pretty = true;
+
+// Middleware
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
 
 // Router
 app.use("/", express.static(path.join(__dirname, "./public")));
