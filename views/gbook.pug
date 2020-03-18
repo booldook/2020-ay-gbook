@@ -1,0 +1,21 @@
+extends ./layout/default.pug
+block content
+	.jumbotron
+		h1
+			span 방명록
+			br
+			small 당신의 한마디를 남겨주세요~
+	.write-wrap
+		form(name="wrForm" method="post" action="/gbook/save")
+			input.form-control.mb-2(type="text" name="writer" placeholder="작성자")
+			textarea.form-control.mb-2(name="content" placeholder="한마디를 남겨주세요.")
+			button.btn.btn-primary.mr-2 글 남기기
+			button.btn.btn-danger 다시작성
+	.list-wrap.mt-5
+		table.table.table-bordered
+			tbody
+				- for(var i=0; i<10; i++) {
+					tr
+						td.p-2(style="width: 20%") 홍길동
+						td.p-2 아버지를 아버지라~
+				- }

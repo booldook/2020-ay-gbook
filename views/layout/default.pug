@@ -1,0 +1,14 @@
+doctype html
+html(lang="ko")
+	head
+		title 방명록
+		meta(charset="UTF-8")
+		link(href="/css/fa.min.css" rel="stylesheet")
+		link(href="/css/bootstrap.min.css" rel="stylesheet")
+		link(href="/css/base.css" rel="stylesheet")
+		link(href=`/css/${name}.css` rel="stylesheet")
+	body
+		include ../inc/top.pug
+		.container.p-3
+			block content
+		script(src=`/js/${name}.js`)

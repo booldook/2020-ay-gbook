@@ -1,0 +1,20 @@
+{
+  "name": "36.node-gbook",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "supervisor app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.7.3",
+    "mysql2": "^2.1.0",
+    "pug": "^2.0.4"
+  }
+}
