@@ -21,4 +21,21 @@ router.post("/save", async (req, res, next) => {
 	res.redirect("/gbook");
 });
 
+router.get("/delete/:id", async (req, res, next) => {
+	let id = req.params.id;
+	let sql, result;
+	sql = "DELETE FROM gbook WHERE id=?";
+	result = await connect.execute(sql, [id]);
+	res.redirect("/gbook");
+});
+
+router.post("/api/get", async (req, res, next) => {
+	let id = req.body.id;
+	let sql, result;
+	sql = "SELECT * FROM gbook WHERE id=?";
+	result = await connect.execute(sql, [id]);
+	res.json(result[0][0]);
+});
+
+
 module.exports = router;
