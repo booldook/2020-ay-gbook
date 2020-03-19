@@ -37,5 +37,13 @@ router.post("/api/get", async (req, res, next) => {
 	res.json(result[0][0]);
 });
 
+router.post("/update", async (req, res, next) => {
+	let {id, writer, content} = req.body;
+	let sql, result;
+	sql = "UPDATE gbook SET writer=?, content=?, updated=NOW() WHERE id=?";
+	result = await connect.execute(sql, [writer, content, id]);
+	res.redirect("/gbook");
+});
+
 
 module.exports = router;
