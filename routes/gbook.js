@@ -1,16 +1,24 @@
 const router = require('express').Router();
 const connect = require('../modules/mysql');
 const moment = require('moment');
+const pager = require('../modules/pager');
 
-router.get("/", async (req, res, next) => {
-	let sql, result;
-	sql = "SELECT * FROM gbook ORDER BY id DESC";
+router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
+	let page = Number(req.params.page);
+	if(!page) page = 1;
+	req.app.locals.page = page;
+	let sql, sqls, result, pagerVals;
+	sql = "SELECT count(id) FROM gbook";
 	result = await connect.execute(sql);
+	pagerVals = pager({ page, total: result[0][0]['count(id)'] });
+	sql = "SELECT * FROM gbook ORDER BY id DESC LIMIT ?, ?";
+	sqls = [pagerVals.stRec, pagerVals.list];
+	result = await connect.execute(sql, sqls);
 	// res.json(	moment(result[0][6].created).format('MM-DD HH:mm:ss')	);
 	for(let v of result[0]) {
 		v.created = moment(v.created).format('MM-DD HH:mm:ss');
 	}
-	res.render("gbook", {name: "gbook", lists: result[0]});
+	res.render("gbook", {name: "gbook", lists: result[0], pager: pagerVals});
 });
 
 router.post("/save", async (req, res, next) => {
