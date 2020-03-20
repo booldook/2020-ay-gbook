@@ -37,6 +37,13 @@ router.post("/api/get", async (req, res, next) => {
 	res.json(result[0][0]);
 });
 
+router.get("/api/max", async (req, res, next) => {
+	let sql, result;
+	sql = "SELECT id FROM gbook ORDER BY id DESC LIMIT 0, 1";
+	result = await connect.execute(sql);
+	res.json(result[0][0]);
+});
+
 router.post("/update", async (req, res, next) => {
 	let {id, writer, content} = req.body;
 	let sql, result;
