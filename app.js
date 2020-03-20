@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 const indexRouter = require('./routes/index');
 const gbookRouter = require('./routes/gbook');
+const userRouter = require('./routes/user');
 
 app.listen(process.env.PORT, () => {
 	console.log(`http://127.0.0.1:${process.env.PORT}`);
@@ -22,6 +23,7 @@ app.use(express.urlencoded({extended: false}));
 app.use("/", express.static(path.join(__dirname, "./public")));
 app.use("/", indexRouter);
 app.use("/gbook", gbookRouter);
+app.use("/user", userRouter);
 
 // 404 Error
 app.use((req, res, next) => {
