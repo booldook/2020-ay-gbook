@@ -1,35 +1,72 @@
-style.
-	.pager-wrap {margin: 50px auto; display: flex; justify-content: center; color: #222;}
-	.pager-wrap > a {flex: 30px 0 0; height: 30px; text-align: center; line-height: 30px; border: 1px solid #aaa; margin-right: -1px; text-decoration: none;}
-	.pager-wrap > a:link,
-	.pager-wrap > a:hover,
-	.pager-wrap > a:visited,
-	.pager-wrap > a:active {color: inherit;}
-	.bt-first {border-radius: 6px 0 0 6px;}
-	.bt-last {border-radius: 0 6px 6px 0;}
-	.bt-first, .bt-last, .bt-prev, .bt-next {border: none !important; background-color: #bbbdbe; color: #fff !important;}
-	.pager-wrap > a.disable {background-color: #dadada; cursor: not-allowed;}
-	.pager-wrap > a.active {background-color: royalblue; color: #fff !important;}
-.pager-wrap
-	if pager.first > 0
-		a.bt-first.fa.fa-angle-double-left(href=`/${name}/list/${pager.first}`)
-	else
-		a.bt-first.fa.fa-angle-double-left.disable
-	if pager.prev > 0
-		a.bt-prev.fa.fa-angle-left(href=`/${name}/list/${pager.prev}`)
-	else
-		a.bt-prev.fa.fa-angle-left.disable
-	- for(var i=pager.std; i<=pager.end; i++) {
-		if pager.page == i 
-			a.active(href=`/${name}/list/${i}`)= i
+nav
+	ul.pagination.justify-content-center
+		li.page-item
+			a.page-link(href="/gbook/list/1")
+				i.fa.fa-angle-double-left
+		if pager.prev > 0
+			li.page-item
+				a.page-link(href=`/gbook/list/${pager.prev}`)
+					i.fa.fa-angle-left
 		else
-			a(href=`/${name}/list/${i}`)= i
-	- }
-	if pager.next > 0
-		a.bt-next.fa.fa-angle-right(href=`/${name}/list/${pager.next}`)
-	else
-		a.bt-next.fa.fa-angle-right.disable
-	if pager.last > 0
-		a.bt-last.fa.fa-angle-double-right(href=`/${name}/list/${pager.last}`)
-	else
-		a.bt-last.fa.fa-angle-double-right.disable
+			li.page-item.disabled
+				a.page-link(href="#" tabindex="-1" aria-disabled="true")
+					i.fa.fa-angle-left
+		- for(var i=pager.std; i<=pager.end; i++) {
+			if pager.page == i 
+				li.page-item.active(aria-current="page")
+					a.page-link(href=`/gbook/list/${i}`)= i
+						span.sr-only (current)
+			else
+				li.page-item
+					a.page-link(href=`/gbook/list/${i}`)= i
+		- }
+		if pager.page == pager.last
+			li.page-item.disabled
+				a.page-link(href="#" tabindex="-1" aria-disabled="true")
+					i.fa.fa-angle-right
+		else
+			li.page-item
+				a.page-link(href=`/gbook/list/${pager.next}`)
+					i.fa.fa-angle-right
+		li.page-item
+			a.page-link(href=`/gbook/list/${pager.last}`)
+				i.fa.fa-angle-double-right
+
+
+
+
+//- style.
+//- 	.pager-wrap {margin: 50px auto; display: flex; justify-content: center; color: #222;}
+//- 	.pager-wrap > a {flex: 30px 0 0; height: 30px; text-align: center; line-height: 30px; border: 1px solid #aaa; margin-right: -1px; text-decoration: none;}
+//- 	.pager-wrap > a:link,
+//- 	.pager-wrap > a:hover,
+//- 	.pager-wrap > a:visited,
+//- 	.pager-wrap > a:active {color: inherit;}
+//- 	.bt-first {border-radius: 6px 0 0 6px;}
+//- 	.bt-last {border-radius: 0 6px 6px 0;}
+//- 	.bt-first, .bt-last, .bt-prev, .bt-next {border: none !important; background-color: #bbbdbe; color: #fff !important;}
+//- 	.pager-wrap > a.disable {background-color: #dadada; cursor: not-allowed;}
+//- 	.pager-wrap > a.active {background-color: royalblue; color: #fff !important;}
+//- .pager-wrap
+//- 	if pager.first > 0
+//- 		a.bt-first.fa.fa-angle-double-left(href=`/${name}/list/${pager.first}`)
+//- 	else
+//- 		a.bt-first.fa.fa-angle-double-left.disable
+//- 	if pager.prev > 0
+//- 		a.bt-prev.fa.fa-angle-left(href=`/${name}/list/${pager.prev}`)
+//- 	else
+//- 		a.bt-prev.fa.fa-angle-left.disable
+//- 	- for(var i=pager.std; i<=pager.end; i++) {
+//- 		if pager.page == i 
+//- 			a.active(href=`/${name}/list/${i}`)= i
+//- 		else
+//- 			a(href=`/${name}/list/${i}`)= i
+//- 	- }
+//- 	if pager.next > 0
+//- 		a.bt-next.fa.fa-angle-right(href=`/${name}/list/${pager.next}`)
+//- 	else
+//- 		a.bt-next.fa.fa-angle-right.disable
+//- 	if pager.last > 0
+//- 		a.bt-last.fa.fa-angle-double-right(href=`/${name}/list/${pager.last}`)
+//- 	else
+//- 		a.bt-last.fa.fa-angle-double-right.disable
