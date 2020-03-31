@@ -2,6 +2,7 @@ const router = require('express').Router();
 const connect = require('../modules/mysql');
 const moment = require('moment');
 const pager = require('../modules/pager');
+const { upload } = require('../modules/multer');
 
 router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 	let page = Number(req.params.page || 1);
@@ -32,11 +33,16 @@ router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 	}
 });
 
-router.post("/save", async (req, res, next) => {
+router.post("/save", upload.single("upfile"), async (req, res, next) => {
 	let { writer, content } = req.body;
-	let sql, result;
+	let sql, result, sqls = [writer, content];
 	sql = "INSERT INTO gbook SET writer=?, content=?";
-	result = await connect.execute(sql, [writer, content]);
+	if(req.file) {
+		sql += " , orifile=?, realfile=?";
+		sqls.push(req.file.originalname);
+		sqls.push(req.file.filename);
+	}
+	result = await connect.execute(sql, sqls);
 	res.redirect("/gbook");
 });
 

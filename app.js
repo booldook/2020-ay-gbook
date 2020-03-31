@@ -16,7 +16,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 
 // Router
-app.use("/", express.static(path.join(__dirname, "./public")));
+app.use("/", express.static(path.join(__dirname, "./public"))); //절대+절대, 절대+상대 -> 절대좌표 변환
+app.use("/storages", express.static(path.join(__dirname, "./uploads"))); //상대좌표를 절대좌표로 변환
 app.use("/", indexRouter);
 app.use("/gbook", gbookRouter);
 app.use("/user", userRouter);
