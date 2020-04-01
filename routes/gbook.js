@@ -1,3 +1,4 @@
+const path = require('path');
 const router = require('express').Router();
 const connect = require('../modules/mysql');
 const moment = require('moment');
@@ -23,11 +24,18 @@ router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 		sqls = [pagerVals.stRec, pagerVals.list];
 		result = await connect.execute(sql, sqls);
 		// res.json(	moment(result[0][6].created).format('MM-DD HH:mm:ss')	);
+		let ext;
 		for(let v of result[0]) {
 			v.created = moment(v.created).format('MM-DD HH:mm:ss');
+			if(v.realfile) {
+				v.realfile = "/storages/"+v.realfile.substr(0, 6)+"/"+v.realfile;
+				ext = path.extname(v.realfile).substr(1).toLowerCase();
+				if(ext === "jpeg") ext = "jpg";
+				v.icon = "/img/"+ext+".png";
+			}
 		}
-		// res.render("gbook", {name: "gbook", lists: result[0], pager: pagerVals});
-		res.json(result[0]);
+		res.render("gbook", {name: "gbook", lists: result[0], pager: pagerVals});
+		// res.json(result[0]);
 	}
 	catch(err) {
 		next(err);

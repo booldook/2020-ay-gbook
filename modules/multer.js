@@ -24,7 +24,7 @@ const makeFile = (filename) => {
 
 /* 허용된 파일만 필터링 */
 const filter = (req, file, cb) => {
-	let ext = path.extname(file.originalname).toLocaleLowerCase();
+	let ext = path.extname(file.originalname).toLowerCase();
 	if(['.jpg', '.jpeg', '.gif', '.png', '.pdf'].indexOf(ext) > -1) cb(null, true);
 	else cb(null, false);
 }
