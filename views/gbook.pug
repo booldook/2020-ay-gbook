@@ -30,6 +30,8 @@ block content
 						td.p-2= v.writer
 						td.p-2.text-left= v.content
 						td.p-2
+							if v.realfile
+								img(src=`${v.icon}` style="max-width: 32px; cursor: pointer;" onclick=`viewFile("${v.realfile}");`)
 						td.p-2= v.created
 						td.p-2
 							//- i.fa.fa-edit.mr-2(data-id=`${v.id}` onclick="onChg(this)")
@@ -37,3 +39,4 @@ block content
 							i.fa.fa-edit.mr-2(onclick=`onChg(this, ${v.id})` style="cursor: pointer;")
 							i.fa.fa-trash(onclick=`onRev(this, ${v.id})` style="cursor: pointer;")
 		include ./inc/pager.pug
+	include ./inc/modal.pug

@@ -27,3 +27,8 @@ function onRev(el, id) {
 		location.href = "/gbook/delete/"+id;
 	}
 }
+
+function viewFile(filename) {
+	$("#fileModal").modal({"show": true});
+	$("#fileModal").find("img").attr("src", filename);
+}
