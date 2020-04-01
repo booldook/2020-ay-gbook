@@ -26,7 +26,8 @@ router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 		for(let v of result[0]) {
 			v.created = moment(v.created).format('MM-DD HH:mm:ss');
 		}
-		res.render("gbook", {name: "gbook", lists: result[0], pager: pagerVals});
+		// res.render("gbook", {name: "gbook", lists: result[0], pager: pagerVals});
+		res.json(result[0]);
 	}
 	catch(err) {
 		next(err);

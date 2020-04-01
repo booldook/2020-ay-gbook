@@ -12,17 +12,26 @@ block content
 			textarea.form-control.mb-2(name="content" placeholder="한마디를 남겨주세요.")
 			input.form-control-file(type="file" name="upfile")
 			div.text-danger.mb-3 * jpg, gif, png, pdf 파일만 업로드가 가능합니다.
+			hr
 			button#btSave.btn.btn-primary.mr-2(type="submit") 글 남기기
 			button#btReset.btn.btn-danger(type="reset" onclick="onReset();") 다시작성
 	.list-wrap.mt-5
-		table.table.table-bordered
+		table.table.table-bordered.text-center
+			thead.thead-dark
+				tr
+					th.p-2(style="width:15%") 작성자
+					th.p-2 한마디
+					th.p-2(style="width: 5%;") 첨부
+					th.p-2(style="width: 15%;") 작성일
+					th.p-2(style="width: 8%;") 비고
 			tbody
 				each v in lists
 					tr
-						td.p-2(style="width: 20%;")= v.writer
-						td.p-2= v.content
-						td.p-2(style="width: 20%;")= v.created
-						td.p-2(style="width: 15%;")
+						td.p-2= v.writer
+						td.p-2.text-left= v.content
+						td.p-2
+						td.p-2= v.created
+						td.p-2
 							//- i.fa.fa-edit.mr-2(data-id=`${v.id}` onclick="onChg(this)")
 							//- i.fa.fa-trash(data-id=`${v.id}` onclick="onRev(this)")
 							i.fa.fa-edit.mr-2(onclick=`onChg(this, ${v.id})` style="cursor: pointer;")
