@@ -31,7 +31,7 @@ block content
 						td.p-2.text-left= v.content
 						td.p-2
 							if v.realfile
-								img(src=`${v.icon}` style="max-width: 32px; cursor: pointer;" onclick=`viewFile("${v.realfile}");`)
+								img(src=`${v.icon}` style="max-width: 32px; cursor: pointer;" onclick=`viewFile("${v.realfile}", ${v.id});`)
 						td.p-2= v.created
 						td.p-2
 							//- i.fa.fa-edit.mr-2(data-id=`${v.id}` onclick="onChg(this)")

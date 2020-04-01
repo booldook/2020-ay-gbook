@@ -28,7 +28,12 @@ function onRev(el, id) {
 	}
 }
 
-function viewFile(filename) {
+function viewFile(filename, id) {
 	$("#fileModal").modal({"show": true});
 	$("#fileModal").find("img").attr("src", filename);
+	$("#btDown")[0].dataset["id"] = id;
 }
+
+$("#btDown").click(function(){
+	location.href = "/gbook/download/" + $(this)[0].dataset["id"];
+});

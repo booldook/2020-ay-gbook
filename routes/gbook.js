@@ -87,4 +87,12 @@ router.post("/update", async (req, res, next) => {
 });
 
 
+router.get("/download/:id", async (req, res, next) => {
+	let sql = "SELECT realfile, orifile FROM gbook WHERE id="+req.params.id;
+	const result = await connect.execute(sql);
+	let file = path.join(__dirname, "../uploads/" + result[0][0].realfile.substr(0, 6) + "/" + result[0][0].realfile);
+	// res.json(result[0][0]);
+	res.download(file, result[0][0].orifile);
+});
+
 module.exports = router;
