@@ -2,16 +2,17 @@
 	.modal-dialog
 		.modal-content
 			.modal-header
-				h1 로그인
+				h2 로그인
 				button.close(type="button" data-dismiss="modal" aria-label="Close")
 					span(aria-hidden="true") ×
 			.modal-body.text-center
 				form(name="loginForm" method="post" action="/user/login")
-					.py-2
+					.py-2.d-flex.align-items-center
+						.py-2.w-25 아이디
 						input.form-control(name="userid" type="text" placeholder="아이디")
-					.py-2
+					.py-2.d-flex.align-items-center
+						.py-2.w-25 패스워드
 						input.form-control(name="userpw" type="password")
-					hr
 					.py-2.text-center
 						button.btn.btn-primary 로그인
 			.modal-footer
