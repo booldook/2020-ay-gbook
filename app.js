@@ -5,6 +5,28 @@ const path = require("path");
 const indexRouter = require('./routes/index');
 const gbookRouter = require('./routes/gbook');
 const userRouter = require('./routes/user');
+const session = require('express-session');
+const MySQLSession = require('express-mysql-session')(session);
+const connect = require('./modules/mysql');
+/*
+// express-session
+module.exports = {
+	...
+	const session = {
+
+	}
+	return session;
+}
+
+// express-mysql-session
+module.exports = (session) => {
+	...
+	return store;
+}
+fn(session);
+*/
+
+
 
 // View
 app.set("view engine", "pug");
@@ -14,6 +36,15 @@ app.locals.pretty = true;
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+// Sessions Middleware
+app.use(session({
+	secret: process.env.COOKIE_SALT,
+	resave: false,
+	saveUninitialized: false,
+	cookie: { secure: false },
+	store: new MySQLSession({}, connect)
+}));
 
 // Router
 app.use("/", express.static(path.join(__dirname, "./public"))); //절대+절대, 절대+상대 -> 절대좌표 변환

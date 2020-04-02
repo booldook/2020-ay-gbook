@@ -7,7 +7,7 @@ const connect = mysql.createPool({
 	user: process.env.DB_USER,
 	password: process.env.DB_PASS,
 	connectionLimit: 10,
-	waitForConnections: true
+	waitForConnections: true,
 });
 
 module.exports = connect;
