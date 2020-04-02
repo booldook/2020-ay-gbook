@@ -31,7 +31,10 @@ block content
 						td.p-2.text-left= v.content
 						td.p-2
 							if v.realfile
-								img(src=`${v.icon}` style="max-width: 32px; cursor: pointer;" onclick=`viewFile("${v.realfile}", ${v.id});`)
+								if v.icon === "/img/pdf.png"
+									img.icon(src=`${v.icon}` onclick=`location.href="/gbook/download/${v.id}";`)
+								else
+									img.icon(src=`${v.icon}` onclick=`viewFile("${v.realfile}", ${v.id});`)
 						td.p-2= v.created
 						td.p-2
 							//- i.fa.fa-edit.mr-2(data-id=`${v.id}` onclick="onChg(this)")

@@ -7,6 +7,7 @@ var $email = $(f.email);
 var useridValid = false;
 var emailRegExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
 
+
 $userid.blur(function(){
 	if($userid.val().trim() == "" || $userid.val().trim().length < 4) {
 		useridFail("아이디는 최소 4자 이상입니다.");

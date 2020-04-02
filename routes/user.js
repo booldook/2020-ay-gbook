@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const connect = require('../modules/mysql');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt'); // 암호화 bcrypt.hash(), bcrypt.compare()
 const { alert } = require('../modules/util');
 
 router.get("/signup", (req, res, next) => {
