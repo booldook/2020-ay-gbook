@@ -4,6 +4,7 @@ const connect = require('../modules/mysql');
 const moment = require('moment');
 const pager = require('../modules/pager');
 const { upload } = require('../modules/multer');
+const { isLogin, isLogout } = require('../modules/auth');
 
 router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 	let page = Number(req.params.page || 1);

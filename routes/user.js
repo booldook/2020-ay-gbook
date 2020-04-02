@@ -2,8 +2,9 @@ const router = require('express').Router();
 const connect = require('../modules/mysql');
 const bcrypt = require('bcrypt'); // 암호화 bcrypt.hash(), bcrypt.compare()
 const { alert } = require('../modules/util');
+const { isLogin, isLogout } = require('../modules/auth');
 
-router.get("/signup", (req, res, next) => {
+router.get("/signup", isLogout, (req, res, next) => {
 	res.render("signup", {name: "user"});
 });
 
