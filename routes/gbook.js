@@ -43,10 +43,10 @@ router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 	}
 });
 
-router.post("/save", upload.single("upfile"), async (req, res, next) => {
+router.post("/save", isLogin, upload.single("upfile"), async (req, res, next) => {
 	let { writer, content } = req.body;
-	let sql, result, sqls = [writer, content];
-	sql = "INSERT INTO gbook SET writer=?, content=?";
+	let sql, result, sqls = [writer, content, req.session.user.id];
+	sql = "INSERT INTO gbook SET writer=?, content=?, user_id=?";
 	if(req.file) {
 		sql += " , orifile=?, realfile=?";
 		sqls.push(req.file.originalname);

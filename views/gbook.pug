@@ -46,7 +46,9 @@ block content
 						td.p-2
 							//- i.fa.fa-edit.mr-2(data-id=`${v.id}` onclick="onChg(this)")
 							//- i.fa.fa-trash(data-id=`${v.id}` onclick="onRev(this)")
-							i.fa.fa-edit.mr-2(onclick=`onChg(this, ${v.id})` style="cursor: pointer;")
-							i.fa.fa-trash(onclick=`onRev(this, ${v.id})` style="cursor: pointer;")
+							if user
+								if user.id == v.user_id
+									i.fa.fa-edit.mr-2(onclick=`onChg(this, ${v.id})` style="cursor: pointer;")
+									i.fa.fa-trash(onclick=`onRev(this, ${v.id})` style="cursor: pointer;")
 		include ./inc/pager.pug
 	include ./inc/modal.pug
