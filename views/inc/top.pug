@@ -2,9 +2,13 @@
 	.d-flex
 		.logo.p-3.mr-3 
 			a(href="/" style="color: inherit; text-decoration: none;") LOGO
-		.link-gbook.p-3 
+		.p-3 
 			a(href="/gbook" style="color: inherit; text-decoration: none;") 방명록
 	.d-flex
-		.link-logout.p-3(onclick=`$("#loginModal").modal({show: true});`) 로그인
-		.link-logout.p-3 
-			a(href="/user/signup" style="color: inherit; text-decoration: none;") 회원가입
+		if user
+			.p-3
+				a(href="/user/logout" style="color: inherit; text-decoration: none;") 로그아웃
+		else
+			.p-3.pointer(onclick=`$("#loginModal").modal({show: true});`) 로그인
+			.p-3 
+				a(href="/user/signup" style="color: inherit; text-decoration: none;") 회원가입

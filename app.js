@@ -46,6 +46,13 @@ app.use(session({
 	store: new MySQLSession({}, connect)
 }));
 
+// PUG에 모든 session정보를 넘기기
+app.use((req, res, next) => {
+	app.locals.user = req.session.user;
+	next();
+});
+
+
 // Router
 app.use("/", express.static(path.join(__dirname, "./public"))); //절대+절대, 절대+상대 -> 절대좌표 변환
 app.use("/storages", express.static(path.join(__dirname, "./uploads"))); //상대좌표를 절대좌표로 변환

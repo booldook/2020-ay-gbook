@@ -2,3 +2,4 @@ a.text-success:focus, a.text-success:hover {
 	color: #89f3a1!important;
 }
 hr {height: 1px;}
+.pointer {cursor: pointer;}

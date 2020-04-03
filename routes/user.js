@@ -5,6 +5,7 @@ const { alert } = require('../modules/util');
 const { isLogin, isLogout } = require('../modules/auth');
 
 router.get("/signup", isLogout, (req, res, next) => {
+	// isLogout(req, res, next);
 	res.render("signup", {name: "user"});
 });
 
@@ -46,6 +47,11 @@ router.post("/login", async (req, res, next) => {
 	else {
 		res.send(alert("아이디와 패스워드를 확인하세요.", "/"));
 	}
+});
+
+router.get("/logout", (req, res, next) => {
+	req.session.destroy();
+	res.send(alert("로그아웃 되었습니다.", "/"));
 });
 
 module.exports = router;
