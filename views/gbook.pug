@@ -5,16 +5,23 @@ block content
 			span 방명록
 			br
 			small 당신의 한마디를 남겨주세요~
-	.write-wrap
-		form(name="wrForm" id="wrForm" method="post" action="/gbook/save" enctype="multipart/form-data")
-			input(type="hidden" name="id" value="")
-			input.form-control.mb-2(type="text" name="writer" placeholder="작성자")
-			textarea.form-control.mb-2(name="content" placeholder="한마디를 남겨주세요.")
-			input.form-control-file(type="file" name="upfile")
-			div.text-danger.mb-3 * jpg, gif, png, pdf 파일만 업로드가 가능합니다.
-			hr
-			button#btSave.btn.btn-primary.mr-2(type="submit") 글 남기기
-			button#btReset.btn.btn-danger(type="reset" onclick="onReset();") 다시작성
+	if user
+		.write-wrap
+			form(name="wrForm" id="wrForm" method="post" action="/gbook/save" enctype="multipart/form-data")
+				input(type="hidden" name="id" value="")
+				input.form-control.mb-2(type="text" name="writer" placeholder="작성자")
+				textarea.form-control.mb-2(name="content" placeholder="한마디를 남겨주세요.")
+				input.form-control-file(type="file" name="upfile")
+				div.text-danger.mb-3 * jpg, gif, png, pdf 파일만 업로드가 가능합니다.
+				hr
+				button#btSave.btn.btn-primary.mr-2(type="submit") 글 남기기
+				button#btReset.btn.btn-danger(type="reset" onclick="onReset();") 다시작성
+	else
+		.login-wrap.border
+			h4 방명록을 작성하시려면 로그인 해 주세요.
+			.py-2
+				button.btn.btn-primary.mr-2(onclick=`$("#loginModal").modal({show: true});`) 로그인
+				button.btn.btn-success(onclick="location.href = '/user/signup';") 회원가입
 	.list-wrap.mt-5
 		table.table.table-bordered.text-center
 			thead.thead-dark

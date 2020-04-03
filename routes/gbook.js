@@ -4,7 +4,7 @@ const connect = require('../modules/mysql');
 const moment = require('moment');
 const pager = require('../modules/pager');
 const { upload } = require('../modules/multer');
-const { isLogin, isLogout } = require('../modules/auth');
+const { isLogin, isLogout, isLoginDownload } = require('../modules/auth');
 
 router.get(["/", "/list", "/list/:page"], async (req, res, next) => {
 	let page = Number(req.params.page || 1);
@@ -88,7 +88,7 @@ router.post("/update", async (req, res, next) => {
 });
 
 
-router.get("/download/:id", async (req, res, next) => {
+router.get("/download/:id", isLoginDownload, async (req, res, next) => {
 	let sql = "SELECT realfile, orifile FROM gbook WHERE id="+req.params.id;
 	const result = await connect.execute(sql);
 	let file = path.join(__dirname, "../uploads/" + result[0][0].realfile.substr(0, 6) + "/" + result[0][0].realfile);

@@ -1,8 +1,7 @@
 const router = require('express').Router();
 
 router.get("/", (req, res, next) => {
-	console.log(req.session);
-	res.render("index", {name: "index"});
+	res.redirect("/gbook");
 });
 
 module.exports = router;
